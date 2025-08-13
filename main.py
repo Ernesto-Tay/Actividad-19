@@ -69,4 +69,22 @@ class GalletaChispas(Galleta):
     def __init__(self,nombre,precio,peso,cantidad_chispas):
         super().__init__(nombre,precio,peso)
         self.cantidad_chispas = cantidad_chispas
+        self.tipo = "chispas"
+
+    def mostrar_info(self):
+        for i in main_lista.lista:
+            if i["tipo"] == "chispas":
+                main_lista.mostrar(i)
+
+
+class GalletaRellena(Galleta, Relleno):
+    def __init__(self,nombre,precio,peso,sabor_relleno):
+        super().__init__(nombre,precio,peso)
+        self.sabor_relleno = sabor_relleno
+        self.tipo = "relleno"
+
+    def mostrar_info(self):
+        for i in main_lista.lista:
+            if i["tipo"] == "relleno":
+                main_lista.mostrar(i)
 
