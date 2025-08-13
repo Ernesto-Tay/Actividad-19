@@ -73,7 +73,7 @@ class Galleta:
                     raise ValueError("El precio debe ser mayor a 0")
                 if self.peso <= 0:
                     raise ValueError("El peso debe ser mayor a 0")
-
+                break
             except ValueError:
                 print("Las entradas numéricas deben ser números enteros")
             except NombreCortoError as e:
@@ -131,7 +131,7 @@ class GalletaChispas(Galleta):
                     raise ValueError("El peso debe ser mayor a 0")
                 if self.cantidad_chispas <= 0:
                     raise ValueError("La cantidad de chispas debe ser mayor a 0")
-
+                break
             except ValueError:
                 print("Las entradas numéricas deben ser números enteros")
             except NombreCortoError as e:
@@ -176,7 +176,7 @@ class GalletaRellena(Galleta, Relleno):
                     raise ValueError("El peso debe ser mayor a 0")
                 if not self.sabor_relleno:
                     raise ValueError("Debe ingresar un nombre de relleno")
-
+                break
             except ValueError:
                 print("Las entradas numéricas deben ser números enteros")
             except NombreCortoError as e:
