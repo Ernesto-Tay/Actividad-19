@@ -1,4 +1,17 @@
 import random
+class RegistroDuplicadoError(Exception):
+    "Pasa cuando se registra una entrada ya existente en una lista"
+    pass
+
+class NombreCortoError(Exception):
+    "Pasa cuando el nombre es muy corto"
+    pass
+
+class NombreNumericoError(Exception):
+    "pasa cuando el nombre tiene números"
+    pass
+
+
 class lista:
     def __init__(self):
         self.lista = []
@@ -27,7 +40,7 @@ class lista:
         else:
             for galleta in self.lista:
                 if galleta.nombre == item:
-                    self.lista.remove(galleta.nombre)
+                    self.lista.remove(galleta)
                     print("Galleta eliminada")
                     break
 main_lista=lista()
@@ -43,13 +56,15 @@ class Galleta:
     def validar(self):
         while True:
             try:
-                self.nombre = input("\nIngrese el nombre de la galleta: ")
+                self.nombre = input("\nIngrese el nombre de la galleta: ").capitalize()
                 self.precio = int(input("Ingrese el precio del galleta: "))
                 self.peso = int(input("Ingrese el peso del galleta: "))
-                if self.nombre.len()<3:
-                    raise ValueError("El nombre debe tener al menos 3 letras")
-                elif not self.nombre.isApha():
-                    raise ValueError("El nombre no puede tener números")
+                if len(self.nombre)<3:
+                    raise NombreCortoError("El nombre debe tener al menos 3 letras")
+                elif not self.nombre.isalpha():
+                    raise NombreNumericoError("El nombre no puede tener números")
+                elif any(cookie.nombre == self.nombre for cookie in main_lista.lista if main_lista.lista):
+                    raise RegistroDuplicadoError("Ya existe una galleta con ese nombre")
                 if self.precio <= 0:
                     raise ValueError("El precio debe ser mayor a 0")
                 if self.peso <= 0:
@@ -66,7 +81,7 @@ class Galleta:
         else:
             print("\n---------- GALLETAS BÁSICAS ----------")
             for i in main_lista.lista:
-                if self.tipo == "Básica":
+                if i.tipo == "Básica":
                     main_lista.mostrar(i)
                     print(f"Tipo: {i.tipo}")
 
@@ -90,14 +105,16 @@ class GalletaChispas(Galleta):
     def validar(self):
         while True:
             try:
-                self.nombre = input("\nIngrese el nombre de la galleta: ")
+                self.nombre = input("\nIngrese el nombre de la galleta: ").capitalize()
                 self.precio = int(input("Ingrese el precio del galleta: "))
                 self.peso = int(input("Ingrese el peso del galleta: "))
                 self.cantidad_chispas = int(input("Ingrese la cantidad de chispas: "))
-                if self.nombre.len()<3:
-                    raise ValueError("El nombre debe tener al menos 3 letras")
-                elif not self.nombre.isApha():
-                    raise ValueError("El nombre no puede tener números")
+                if len(self.nombre)<3:
+                    raise NombreCortoError("El nombre debe tener al menos 3 letras")
+                elif not self.nombre.isalpha():
+                    raise NombreNumericoError("El nombre no puede tener números")
+                elif any(cookie.nombre == self.nombre for cookie in main_lista.lista if main_lista.lista):
+                    raise RegistroDuplicadoError("Ya existe una galleta con ese nombre")
                 if self.precio <= 0:
                     raise ValueError("El precio debe ser mayor a 0")
                 if self.peso <= 0:
@@ -120,21 +137,23 @@ class GalletaChispas(Galleta):
 
 class GalletaRellena(Galleta, Relleno):
     def __init__(self,nombre,precio,peso,sabor_relleno):
-        super().__init__(nombre,precio,peso)
-        self.sabor_relleno = sabor_relleno
+        Galleta.__init__(self,nombre,precio,peso)
+        Relleno.__init__(self,sabor_relleno)
         self.tipo = "relleno"
 
     def validar(self):
         while True:
             try:
-                self.nombre = input("\nIngrese el nombre de la galleta: ")
+                self.nombre = input("\nIngrese el nombre de la galleta: ").capitalize()
                 self.precio = int(input("Ingrese el precio del galleta: "))
                 self.peso = int(input("Ingrese el peso del galleta: "))
                 self.sabor_relleno = input("Ingrese el tipo de relleno: ")
-                if self.nombre.len()<3:
-                    raise ValueError("El nombre debe tener al menos 3 letras")
-                elif not self.nombre.isApha():
-                    raise ValueError("El nombre no puede tener números")
+                if len(self.nombre)<3:
+                    raise NombreCortoError("El nombre debe tener al menos 3 letras")
+                elif not self.nombre.isalpha():
+                    raise NombreNumericoError("El nombre no puede tener números")
+                elif any( cookie.nombre == self.nombre for cookie in main_lista.lista if main_lista.lista):
+                    raise RegistroDuplicadoError("Ya existe una galleta con ese nombre")
                 if self.precio <= 0:
                     raise ValueError("El precio debe ser mayor a 0")
                 if self.peso <= 0:
@@ -147,12 +166,11 @@ class GalletaRellena(Galleta, Relleno):
             except Exception as e:
                 print("Error inesperado: ",e)
 
-
     def mostrar_info(self):
         for i in main_lista.lista:
             if i.tipo == "relleno":
                 main_lista.mostrar(i)
-                print("Relleno: " +  self.describir_relleno)
+                print(f"Relleno:   {i.describir_relleno}")
 
 while True:
     print("\n\n---------- MENÚ DE GALLETAS ----------\n1. Registrar galleta básica\n2. Registrar galleta con chispas\n3. Registrar galleta rellena\n4. Listar galletas por tipo\n5. Buscar galletap por nombre\n. 6. Eliminar galleta por nombre\n. 7. Salir")
@@ -186,7 +204,7 @@ while True:
         case "5":
             while True:
                 name_search = input("\nIngrese el nombre de la galleta a buscar: ")
-                if not name_search.isAlpha():
+                if not name_search.isalpha():
                     print("El nombre de la galleta no debe tener números")
                 else:
                     break
@@ -195,11 +213,11 @@ while True:
         case "6":
             while True:
                 name_search = input("\nIngrese el nombre de la galleta a buscar: ")
-                if not name_search.isAlpha():
+                if not name_search.isalpha():
                     print("El nombre de la galleta no debe tener números")
                 else:
+                    main_lista.eliminar(name_search)
                     break
-                main_lista.eliminar(name_search)
         case "7":
             print("Saliendo...")
             break
