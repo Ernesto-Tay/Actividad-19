@@ -45,9 +45,11 @@ class Galleta:
         if not main_lista.lista:
             print("No hay galletas en la lista")
         else:
+            print("\n---------- GALLETAS BÁSICAS ----------")
             for i in main_lista.lista:
-                main_lista.mostrar(i)
-                print(f"Tipo: {i.tipo}")
+                if self.tipo == "Básica":
+                    main_lista.mostrar(i)
+                    print(f"Tipo: {i.tipo}")
 
 
 class Relleno:
@@ -92,6 +94,7 @@ class GalletaChispas(Galleta):
         for i in main_lista.lista:
             if i.tipo == "chispas":
                 main_lista.mostrar(i)
+                print(f"Chispas: {i.cantidad_chispas}")
 
 
 class GalletaRellena(Galleta, Relleno):
@@ -126,6 +129,7 @@ class GalletaRellena(Galleta, Relleno):
         for i in main_lista.lista:
             if i.tipo == "relleno":
                 main_lista.mostrar(i)
+                print("Relleno: " +  self.describir_relleno)
 
 while True:
     print("\n\n---------- MENÚ DE GALLETAS ----------\n1. Registrar galleta básica\n2. Registrar galleta con chispas\n3. Registrar galleta rellena\n4. Listar galletas por tipo\n5. Buscar galletap por nombre\n. 6. Eliminar galleta por nombre\n. 7. Salir")
@@ -142,9 +146,20 @@ while True:
             main_lista.agregar(galletaChispada)
 
         case "3":
-            pass
+            galletaRellena = GalletaRellena("","","",0)
+            galletaRellena.validar()
+            main_lista.agregar(galletaRellena)
+
         case "4":
-            pass
+            galleta = Galleta("", 0, 0)
+            galleta.mostrar_info()
+
+            galletaChispas = GalletaChispas("", "", "", 0)
+            galletaChispas.mostrar_info()
+
+            galletaRellena = GalletaRellena("", "", "", 0)
+            galletaRellena.mostrar_info()
+
         case "5":
             pass
         case "6":
