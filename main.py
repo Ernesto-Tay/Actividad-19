@@ -33,6 +33,8 @@ class lista:
                 if galleta.nombre == item:
                     print(f"Galleta encontrada\nNombre: {galleta.nombre}\nPrecio: Q{galleta.precio}\nPeso: {galleta.peso}\nTipo: {galleta.tipo}")
                     break
+            else:
+                print("No se encontró la galleta")
 
     def eliminar(self, item):
         if not self.lista:
@@ -43,6 +45,8 @@ class lista:
                     self.lista.remove(galleta)
                     print("Galleta eliminada")
                     break
+            else:
+                print("No se encontró la galleta")
 main_lista=lista()
 
 
@@ -72,6 +76,12 @@ class Galleta:
 
             except ValueError:
                 print("Las entradas numéricas deben ser números enteros")
+            except NombreCortoError as e:
+                print(e)
+            except NombreNumericoError as e:
+                print(e)
+            except RegistroDuplicadoError as e:
+                print(e)
             except Exception as e:
                 print("Error inesperado: ",e)
 
@@ -124,6 +134,12 @@ class GalletaChispas(Galleta):
 
             except ValueError:
                 print("Las entradas numéricas deben ser números enteros")
+            except NombreCortoError as e:
+                print(e)
+            except NombreNumericoError as e:
+                print(e)
+            except RegistroDuplicadoError as e:
+                print(e)
             except Exception as e:
                 print("Error inesperado: ",e)
 
@@ -163,6 +179,12 @@ class GalletaRellena(Galleta, Relleno):
 
             except ValueError:
                 print("Las entradas numéricas deben ser números enteros")
+            except NombreCortoError as e:
+                print(e)
+            except NombreNumericoError as e:
+                print(e)
+            except RegistroDuplicadoError as e:
+                print(e)
             except Exception as e:
                 print("Error inesperado: ",e)
 
