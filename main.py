@@ -20,7 +20,7 @@ class lista:
         self.lista.append(item)
 
     def mostrar(self, item):
-        print(f"Nombre: {item.nombre}")
+        print(f"\nNombre: {item.nombre}")
         print(f"Precio: Q{item.precio}")
         print(f"Peso: {item.peso}")
         print(f"Tipo: {item.tipo}")
@@ -62,7 +62,7 @@ class Galleta:
             try:
                 self.nombre = input("\nIngrese el nombre de la galleta: ").capitalize()
                 self.precio = int(input("Ingrese el precio del galleta: "))
-                self.peso = int(input("Ingrese el peso del galleta: "))
+                self.peso = int(input("Ingrese el peso del galleta (g): "))
                 if len(self.nombre)<3:
                     raise NombreCortoError("El nombre debe tener al menos 3 letras")
                 elif not self.nombre.isalpha():
@@ -89,7 +89,7 @@ class Galleta:
         if not main_lista.lista:
             print("No hay galletas en la lista")
         else:
-            print("\n---------- GALLETAS BÁSICAS ----------")
+            print("\n---------- GALLETAS ----------")
             for i in main_lista.lista:
                 if i.tipo == "Básica":
                     main_lista.mostrar(i)
@@ -117,7 +117,7 @@ class GalletaChispas(Galleta):
             try:
                 self.nombre = input("\nIngrese el nombre de la galleta: ").capitalize()
                 self.precio = int(input("Ingrese el precio del galleta: "))
-                self.peso = int(input("Ingrese el peso del galleta: "))
+                self.peso = int(input("Ingrese el peso del galleta (g): "))
                 self.cantidad_chispas = int(input("Ingrese la cantidad de chispas: "))
                 if len(self.nombre)<3:
                     raise NombreCortoError("El nombre debe tener al menos 3 letras")
@@ -162,7 +162,7 @@ class GalletaRellena(Galleta, Relleno):
             try:
                 self.nombre = input("\nIngrese el nombre de la galleta: ").capitalize()
                 self.precio = int(input("Ingrese el precio del galleta: "))
-                self.peso = int(input("Ingrese el peso del galleta: "))
+                self.peso = int(input("Ingrese el peso del galleta (g): "))
                 self.sabor_relleno = input("Ingrese el tipo de relleno: ")
                 if len(self.nombre)<3:
                     raise NombreCortoError("El nombre debe tener al menos 3 letras")
