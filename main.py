@@ -5,14 +5,31 @@ class lista:
 
     def agregar(self, item):
         self.lista.append(item)
+
     def mostrar(self, item):
         print(f"Nombre: {item.nombre}")
         print(f"Precio: Q{item.precio}")
         print(f"Peso: {item.peso}")
         print(f"Tipo: {item.tipo}")
 
+    def buscar(self, item):
+        if not self.lista:
+            print("Aún no hay galletas")
+        else:
+            for galleta in self.lista:
+                if galleta.nombre == item:
+                    print(f"Galleta encontrada\nNombre: {galleta.nombre}\nPrecio: Q{galleta.precio}\nPeso: {galleta.peso}\nTipo: {galleta.tipo}")
+                    break
+
     def eliminar(self, item):
-        self.lista.remove(item)
+        if not self.lista:
+            print("Aún no hay galletas")
+        else:
+            for galleta in self.lista:
+                if galleta.nombre == item:
+                    self.lista.remove(galleta.nombre)
+                    print("Galleta eliminada")
+                    break
 main_lista=lista()
 
 
@@ -31,6 +48,8 @@ class Galleta:
                 self.peso = int(input("Ingrese el peso del galleta: "))
                 if self.nombre.len()<3:
                     raise ValueError("El nombre debe tener al menos 3 letras")
+                elif not self.nombre.isApha():
+                    raise ValueError("El nombre no puede tener números")
                 if self.precio <= 0:
                     raise ValueError("El precio debe ser mayor a 0")
                 if self.peso <= 0:
@@ -77,6 +96,8 @@ class GalletaChispas(Galleta):
                 self.cantidad_chispas = int(input("Ingrese la cantidad de chispas: "))
                 if self.nombre.len()<3:
                     raise ValueError("El nombre debe tener al menos 3 letras")
+                elif not self.nombre.isApha():
+                    raise ValueError("El nombre no puede tener números")
                 if self.precio <= 0:
                     raise ValueError("El precio debe ser mayor a 0")
                 if self.peso <= 0:
@@ -112,6 +133,8 @@ class GalletaRellena(Galleta, Relleno):
                 self.sabor_relleno = input("Ingrese el tipo de relleno: ")
                 if self.nombre.len()<3:
                     raise ValueError("El nombre debe tener al menos 3 letras")
+                elif not self.nombre.isApha():
+                    raise ValueError("El nombre no puede tener números")
                 if self.precio <= 0:
                     raise ValueError("El precio debe ser mayor a 0")
                 if self.peso <= 0:
@@ -161,9 +184,22 @@ while True:
             galletaRellena.mostrar_info()
 
         case "5":
-            pass
+            while True:
+                name_search = input("\nIngrese el nombre de la galleta a buscar: ")
+                if not name_search.isAlpha():
+                    print("El nombre de la galleta no debe tener números")
+                else:
+                    break
+            main_lista.buscar(name_search)
+
         case "6":
-            pass
+            while True:
+                name_search = input("\nIngrese el nombre de la galleta a buscar: ")
+                if not name_search.isAlpha():
+                    print("El nombre de la galleta no debe tener números")
+                else:
+                    break
+                main_lista.eliminar(name_search)
         case "7":
             print("Saliendo...")
             break
