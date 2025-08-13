@@ -6,10 +6,10 @@ class lista:
     def agregar(self, item):
         self.lista.append(item)
     def mostrar(self, item):
-        print(f"Nombre: {item["nombre"]}")
-        print(f"Precio: {item["precio"]}")
-        print(f"Peso: {item["peso"]}")
-        print(f"Tipo: {item["tipo"]}")
+        print(f"Nombre: {item.nombre}")
+        print(f"Precio: {item.precio}")
+        print(f"Peso: {item.peso}")
+        print(f"Tipo: {item.tipo}")
 
     def eliminar(self, item):
         self.lista.remove(item)
@@ -21,6 +21,7 @@ class Galleta:
         self.nombre = nombre
         self.precio = precio
         self.peso = peso
+        self.tipo = "Básica"
 
     def validar(self):
         while True:
@@ -73,7 +74,7 @@ class GalletaChispas(Galleta):
 
     def mostrar_info(self):
         for i in main_lista.lista:
-            if i["tipo"] == "chispas":
+            if i.tipo == "chispas":
                 main_lista.mostrar(i)
 
 
@@ -85,6 +86,27 @@ class GalletaRellena(Galleta, Relleno):
 
     def mostrar_info(self):
         for i in main_lista.lista:
-            if i["tipo"] == "relleno":
+            if i.tipo == "relleno":
                 main_lista.mostrar(i)
 
+while True:
+    print("\n\n---------- MENÚ DE GALLETAS ----------\n1. Registrar galleta básica\n2. Registrar galleta con chispas\n3. Registrar galleta rellena\n4. Listar galletas por tipo\n5. Buscar galletap por nombre\n. 6. Eliminar galleta por nombre\n. 7. Salir")
+    select = input("Seleccione una opción: ")
+    match select:
+        case "1":
+            pass
+        case "2":
+            pass
+        case "3":
+            pass
+        case "4":
+            pass
+        case "5":
+            pass
+        case "6":
+            pass
+        case "7":
+            print("Saliendo...")
+            break
+        case _:
+            print("Opción inválida, intente nuevamnente")
