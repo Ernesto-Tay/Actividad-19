@@ -192,10 +192,11 @@ class GalletaRellena(Galleta, Relleno):
         for i in main_lista.lista:
             if i.tipo == "relleno":
                 main_lista.mostrar(i)
-                print(f"Relleno:   {i.describir_relleno}")
+                print("Relleno:", end = "")
+                i.describir_relleno
 
 while True:
-    print("\n\n---------- MENÚ DE GALLETAS ----------\n1. Registrar galleta básica\n2. Registrar galleta con chispas\n3. Registrar galleta rellena\n4. Listar galletas por tipo\n5. Buscar galletap por nombre\n. 6. Eliminar galleta por nombre\n. 7. Salir")
+    print("\n\n---------- MENÚ DE GALLETAS ----------\n1. Registrar galleta básica\n2. Registrar galleta con chispas\n3. Registrar galleta rellena\n4. Listar galletas por tipo\n5. Buscar galletap por nombre\n6. Eliminar galleta por nombre\n7. Salir")
     select = input("Seleccione una opción: ")
     match select:
         case "1":
@@ -234,7 +235,7 @@ while True:
 
         case "6":
             while True:
-                name_search = input("\nIngrese el nombre de la galleta a buscar: ")
+                name_search = input("\nIngrese el nombre de la galleta a eliminar: ")
                 if not name_search.isalpha():
                     print("El nombre de la galleta no debe tener números")
                 else:
